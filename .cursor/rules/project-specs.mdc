@@ -1,0 +1,187 @@
+---
+description: Project specification, tech stack, features, and folder structure for the AI-Powered Learning Assistant.
+alwaysApply: true
+---
+
+# Project: AI-Powered Learning Assistant
+
+Full-stack MERN web application.
+
+## Tech Stack
+
+| Layer | Technologies |
+|---|---|
+| Frontend | React, Vite, TypeScript, Tailwind CSS, React Router, Axios |
+| Backend | Node.js, Express.js, TypeScript, JWT, bcryptjs, Multer |
+| Database | MongoDB Atlas, Mongoose |
+| AI | Google Gemini API |
+| Deploy | Vercel (frontend), Render (backend), MongoDB Atlas |
+
+## Folder Structure
+
+```
+client/   ← React frontend
+server/   ← Node.js backend
+```
+
+Always teach folder structure before creating files. Explain why each folder exists.
+
+## UI
+
+The learner will provide a UI design/screenshot for each page before building it.
+Do not assume any UI layout. Wait for the learner to share the design before implementing any page.
+
+---
+
+## Features
+
+### Authentication
+
+- Register
+- Login
+- Forgot Password
+- Change Password
+- JWT Authentication
+- Protected Routes
+
+---
+
+### Dashboard
+
+Display:
+- Total Documents
+- Total Flashcards
+- Total Quizzes
+- Average Quiz Score
+
+Charts:
+- Study Time
+- Quiz Score
+
+Recent Activities:
+- Recently Uploaded Documents
+- Recently Generated Flashcards
+- Recently Completed Quizzes
+
+---
+
+### Documents
+
+Features:
+- Upload PDF
+- View Documents
+- Search Documents
+- Rename Document
+- Delete Document
+- Favorite Document
+
+Each document displays:
+- Document Name
+- Upload Date
+- File Size
+- Total Pages
+- Flashcards Count
+- Quiz Count
+
+---
+
+### Document Details
+
+#### Embedded PDF Viewer
+Display the uploaded PDF inside the application.
+
+#### AI Chat (Google Gemini)
+User can ask questions related to the uploaded document.
+
+Display:
+- Chat History
+- User Messages
+- AI Responses
+
+#### AI Summary
+Generate:
+- Document Summary
+- Key Points
+- Important Concepts
+
+Allow downloading the generated summary.
+
+#### Flashcards
+Generate AI flashcards from the uploaded document.
+
+Options:
+- Generate 5
+- Generate 10
+- Generate 20
+
+Display:
+- Question
+- Answer
+
+Support:
+- Flip Animation
+- Favorite
+- Delete
+
+#### Quizzes
+Generate quizzes using Gemini.
+
+Options:
+- Number of Questions (configurable)
+
+Display:
+- Multiple Choice Questions
+
+Result:
+- Score
+- Correct Answers
+- Wrong Answers
+- Explanation
+
+---
+
+### Flashcards Page
+
+Display all flashcards.
+
+Features:
+- Search
+- Filter by Document
+- Favorite
+- Delete
+- Flip Animation
+
+---
+
+### Quizzes Page
+
+Display:
+- Quiz List
+- Quiz History
+- Scores
+
+Allow:
+- Review Answers
+- View AI Explanation
+
+---
+
+### Profile
+
+Display:
+- Profile Photo
+- Name
+- Email
+
+Features:
+- Upload Avatar
+- Change Password
+- Update Profile
+
+---
+
+### Additional Features
+
+- Download AI-generated Summary
+- Study Streak
+- Favorite Documents

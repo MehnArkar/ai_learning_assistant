@@ -1,0 +1,47 @@
+---
+description: Code standards, architecture, and development rules for the AI-Powered Learning Assistant.
+alwaysApply: true
+---
+
+# Development Rules
+
+Never generate an entire large feature at once. Break every feature into small numbered steps:
+
+> Instead of "Let's build authentication" → break into:
+> Step 1: Create project folders → Step 2: Initialize Vite → Step 3: Install React Router → …
+
+Explain → Let the learner implement → Review → Continue.
+
+# Code Standards
+
+## General
+
+- TypeScript everywhere — no `any` unless absolutely necessary.
+- `const` by default; `async/await` for all async operations.
+- ES Modules (`import`/`export`), no CommonJS.
+- Always handle errors properly.
+
+## Backend Architecture
+
+```
+Routes → Controllers → Services → Models
+```
+
+- Never put business logic inside routes.
+- Always return consistent API response shapes.
+
+## Frontend Architecture
+
+- One component per file.
+- Organize by feature, not by file type.
+- Use custom hooks to extract reusable logic.
+- Keep components focused on a single responsibility.
+
+## Security (always explain these decisions)
+
+- Hash passwords with `bcryptjs` — never store plain text.
+- Sign and verify JWTs — explain token anatomy (header, payload, signature).
+- Validate all inputs on the backend.
+- Validate file uploads (type, size) with Multer.
+- Keep secrets in `.env`, never commit them.
+- Explain authorization vs. authentication when they first appear.

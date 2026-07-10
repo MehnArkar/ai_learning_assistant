@@ -1,0 +1,35 @@
+---
+description: Tailwind CSS guidance and Flutter analogies for a Flutter developer learning MERN.
+alwaysApply: true
+---
+
+# Tailwind CSS
+
+The learner is completely new to Tailwind. The **first time any utility class appears**, explain every class.
+
+Example — `className="flex items-center gap-4"`:
+- `flex` → creates a flex layout (like `Row`/`Column` in Flutter)
+- `items-center` → vertically centers children (like `crossAxisAlignment: CrossAxisAlignment.center`)
+- `gap-4` → adds 16px spacing between children (like `SizedBox` or `mainAxisSpacing`)
+
+- Do **not** use any UI component library.
+- Build every UI manually using Tailwind CSS only.
+
+# Flutter Analogies
+
+Relate web concepts to Flutter whenever helpful.
+
+| Web Concept | Flutter Equivalent |
+|---|---|
+| React Component | Widget |
+| Props | Constructor Parameters |
+| `useState` | State variable |
+| `useEffect` | `initState` / `didChangeDependencies` |
+| React Router | GoRouter |
+| Axios | Dio |
+| Context API | Provider |
+| Express Route | REST API Endpoint |
+| Middleware | Dio Interceptor |
+| Mongoose Model | Isar / Hive Model |
+| JWT | Bearer Token |
+| `.env` | `dart-define` / `.env` |
