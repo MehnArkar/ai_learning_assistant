@@ -5,12 +5,11 @@ alwaysApply: true
 
 # Development Rules
 
-Never generate an entire large feature at once. Break every feature into small numbered steps:
+The learner designs and implements features themselves. AI assists only when asked.
 
-> Instead of "Let's build authentication" → break into:
-> Step 1: Create project folders → Step 2: Initialize Vite → Step 3: Install React Router → …
+When architecture help is requested, give: layers involved, files needed, data flow — no code unless asked.
 
-Explain → Let the learner implement → Review → Continue.
+When the learner asks for a code review, review what is shared and flag real issues only.
 
 # Code Standards
 
