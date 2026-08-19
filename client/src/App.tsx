@@ -6,6 +6,7 @@ import DocumentsPage from "./pages/documents/DocumentsPage"
 import FlashcardsPage from "./pages/flashcards/FlashcardsPage"
 import QuizzesPage from "./pages/quizzes/QuizzesPage"
 import ProfilePage from "./pages/profile/ProfilePage"
+import AppLayout from "./layout/AppLayout"
 
 const App = () => {
   return (
@@ -13,11 +14,13 @@ const App = () => {
     <Route path="/" element={<Navigate to="/login" replace/>}></Route>
     <Route path="/login" element={<LoginPage/>}/>
     <Route path="/register" element={<RegisterPage/>}/>
-    <Route path="/dashboard" element={<DashboardPage/>}/>
-    <Route path="/documents" element={<DocumentsPage />} />
-    <Route path="/flashcards" element={<FlashcardsPage />} />
-    <Route path="/quizzes" element={<QuizzesPage />} />
-    <Route path="/profile" element={<ProfilePage />} />
+    <Route element={<AppLayout/>}>
+      <Route path="/dashboard" element={<DashboardPage/>}/>
+      <Route path="/documents" element={<DocumentsPage />} />
+      <Route path="/flashcards" element={<FlashcardsPage />} />
+      <Route path="/quizzes" element={<QuizzesPage />} />
+      <Route path="/profile" element={<ProfilePage />} />
+    </Route>
    </Routes>
   )
 }
