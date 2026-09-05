@@ -44,3 +44,10 @@ export const authMiddleware = (
     }
 
 }
+
+export const getUserId = (req: AuthRequest): string => {
+    if (!req.userId) {
+      throw new Error('Authentication required')
+    }
+    return req.userId
+}

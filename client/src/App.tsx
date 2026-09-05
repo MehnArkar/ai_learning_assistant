@@ -7,19 +7,25 @@ import FlashcardsPage from "./pages/flashcards/FlashcardsPage"
 import QuizzesPage from "./pages/quizzes/QuizzesPage"
 import ProfilePage from "./pages/profile/ProfilePage"
 import AppLayout from "./layout/AppLayout"
+import PublicRoute from "./components/PublicRoute"
+import ProtectedRoute from "./components/ProtectedRoute"
 
 const App = () => {
   return (
    <Routes>
     <Route path="/" element={<Navigate to="/login" replace/>}></Route>
-    <Route path="/login" element={<LoginPage/>}/>
-    <Route path="/register" element={<RegisterPage/>}/>
-    <Route element={<AppLayout/>}>
-      <Route path="/dashboard" element={<DashboardPage/>}/>
-      <Route path="/documents" element={<DocumentsPage />} />
-      <Route path="/flashcards" element={<FlashcardsPage />} />
-      <Route path="/quizzes" element={<QuizzesPage />} />
-      <Route path="/profile" element={<ProfilePage />} />
+    <Route element={<PublicRoute/>}>
+      <Route path="/login" element={<LoginPage/>}/>
+      <Route path="/register" element={<RegisterPage/>}/>
+    </Route>
+    <Route element={<ProtectedRoute/>}>
+      <Route element={<AppLayout/>}>
+        <Route path="/dashboard" element={<DashboardPage/>}/>
+        <Route path="/documents" element={<DocumentsPage />} />
+        <Route path="/flashcards" element={<FlashcardsPage />} />
+        <Route path="/quizzes" element={<QuizzesPage />} />
+        <Route path="/profile" element={<ProfilePage />} />
+      </Route>
     </Route>
    </Routes>
   )

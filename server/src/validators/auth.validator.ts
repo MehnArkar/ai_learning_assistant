@@ -1,32 +1,27 @@
-import { z } from 'zod'
+import { body } from 'express-validator'
 
-export const registerSchema = z.object({
-  name: z
-    .string()
+export const registerRules = [
+  body('name')
     .trim()
-    .min(2, 'Name must be at least 2 characters')
-    .max(50, 'Name must be at most 50 characters'),
-  email: z
-    .string()
+    .isLength({ min: 2, max: 50 })
+    .withMessage('Name must be 2–50 characters'),
+  body('email')
     .trim()
-    .email('Invalid email address')
-    .toLowerCase(),
-  password: z
-    .string()
-    .min(6, 'Password must be at least 6 characters')
-    .max(100, 'Password must be at most 100 characters'),
-})
+    .isEmail()
+    .withMessage('Invalid email address')
+    .normalizeEmail(),
+  body('password')
+    .isLength({ min: 6, max: 100 })
+    .withMessage('Password must be 6–100 characters'),
+]
 
-export const loginSchema = z.object({
-  email: z
-    .string()
+export const loginRules = [
+  body('email')
     .trim()
-    .email('Invalid email address')
-    .toLowerCase(),
-  password: z
-    .string()
-    .min(1, 'Password is required'),
-})
-
-export type RegisterInput = z.infer<typeof registerSchema>
-export type LoginInput = z.infer<typeof loginSchema>
+    .isEmail()
+    .withMessage('Invalid email address')
+    .normalizeEmail(),
+  body('password')
+    .notEmpty()
+    .withMessage('Password is required'),
+]

@@ -89,3 +89,12 @@ export const loginUser= async (input:LoginInput):Promise<AuthResult> =>{
         token
     }
 }
+
+export const getCurrentUser = async(userId: string) => {
+    const user = await User.findById(userId);
+    if(!user){
+        throw new Error('User not found');
+    }
+
+    return formatUser(user);
+}

@@ -1,10 +1,11 @@
-import { useState } from "react";
+import { use, useState } from "react";
 import { NavLink, Outlet, useLocation, useNavigate } from "react-router-dom";
 import {
     LayoutDashboard, FileText, BookOpen, HelpCircle, User,
     ChevronLeft, ChevronRight, Bell, Search, LogOut, Settings,
     BrainCircuit, X, Menu,
   } from 'lucide-react'
+import { useAuth } from "../context/AuthContext";
 
   const NAV_ITEMS = [
     { to: '/dashboard', label: 'Dashboard', icon: LayoutDashboard },
@@ -33,9 +34,10 @@ const AppLayout = ()=>{
     const location = useLocation()
     const navigate = useNavigate()
     const title = PAGE_TITLES[location.pathname] ?? 'Dashboard'
+    const { user, logout } = useAuth()
     const handleLogout = () => {
-        localStorage.removeItem('token')
-        navigate('/login')
+       logout()
+       navigate('/login')
     }
 
     return (
@@ -170,15 +172,23 @@ const AppLayout = ()=>{
                                     onClick={()=>{setProfileOpen(!profileOpen); setNotifOpen(false);}}
                                     className="flex items-center gap-2 px-2 py-1 rounded-xl hover:bg-slate-100"
                                 >
-                                    <div className="w-8 h-8 rounded-full bg-slate-200 flex items-center justify-center">
+                                    { user?.avatar 
+                                    ? (<img src={user.avatar} alt={user.name} className="w-8 h-8 rounded-full object-cover" />)
+                                    : (<div className="w-8 h-8 rounded-full bg-slate-200 flex items-center justify-center">
                                         <User size={16} className="text-slate-500"/>
-                                    </div>
-                                    <span className="text-sm font-medium text-slate-700 hidden md:block">User</span>
+                                       </div>)
+                                    }
+                                    
+                                    <span className="text-sm font-medium text-slate-700 hidden md:block">{use?.name??'User'}</span>
                                     
                                 </button> 
 
                                 { profileOpen && (
                                     <div className="absolute top-12 right-0 w-52 bg-white rounded-2xl border border-slate-100 shadow-xl z-50 overflow-hidden">
+                                        <div className="p-4 border-b border-slate-100">
+                                            <p className="font-semibold text-sm text-slate-900">{user?.name}</p>
+                                            <p className="text-xs text-slate-500 truncate">{user?.email}</p>
+                                        </div>
                                         <div className="p-2">
                                             <button 
                                                 type="button"

@@ -4,9 +4,10 @@ import { useState } from "react"
 import Button from "../../components/buttom";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import { login } from "../../api/auth";
+import { useAuth } from "../../context/AuthContext";
 
 const LoginPage = () =>{
+    const { loginUser } = useAuth()
     const [showPass, setShowPass] = useState(false)
     const [loading, setLoading] = useState(false)
     const [error, setError] = useState('')
@@ -28,8 +29,11 @@ const LoginPage = () =>{
             }
 
             setLoading(true);
-            const res = await login(form);
-            localStorage.setItem('token', res.data.token)
+            
+            const res = await loginUser({
+              email: form.email,
+              password: form.password,
+            })
             navigate('/dashboard')
         }catch (e){
             if(axios.isAxiosError(e)){

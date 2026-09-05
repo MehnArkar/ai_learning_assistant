@@ -29,6 +29,14 @@ export interface LoginPayload{
     password: string
 }
 
+export interface MeResponse {
+    success: boolean
+    message: string
+    data: {
+      user: AuthUser
+    }
+  }
+
 
 
 export const register = async (payload:RegisterPayload) => {
@@ -44,5 +52,10 @@ export const login = async(payload : LoginPayload) => {
         '/auth/login',
         payload
     );
+    return data;
+}
+
+export const getMe = async () => {
+    const { data } = await api.get<MeResponse>('/auth/me');
     return data;
 }

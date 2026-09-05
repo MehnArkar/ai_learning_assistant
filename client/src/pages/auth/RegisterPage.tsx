@@ -3,13 +3,13 @@ import Input from '../../components/Input'
 import React, { useState } from 'react'
 import Button from '../../components/buttom';
 import { useNavigate } from 'react-router-dom'
-import { register } from '../../api/auth';
 import axios from 'axios';
+import { useAuth } from '../../context/AuthContext';
 
 
 const RegisterPage = () =>{
+    const { registerUser } = useAuth()
     const navigate = useNavigate();
-
     const [showPass, setShowPass] = useState(false);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState('');
@@ -38,13 +38,11 @@ const RegisterPage = () =>{
 
         try {
             setLoading(true)
-            const res = await register({
-                name: form.name,
-                email: form.email,
-                password: form.password
-            });
-
-            localStorage.setItem('token', res.data.token)
+            await registerUser({
+            name: form.name,
+            email: form.email,
+            password: form.password,
+            })
             navigate('/dashboard')
         } catch(err){
             if(axios.isAxiosError(err)){

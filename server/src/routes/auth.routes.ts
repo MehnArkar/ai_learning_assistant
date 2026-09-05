@@ -1,21 +1,13 @@
-import { Router } from "express";
-import { validate } from "../middleware/validate";
-import { loginSchema, registerSchema } from "../validators/auth.validator";
-import { login, register } from "../controllers/auth.controller";
-import { authMiddleware, AuthRequest } from "../middleware/auth.middleware";
+import { Router } from 'express'
+import { loginRules, registerRules } from '../validators/auth.validator'
+import { login, me, register } from '../controllers/auth.controller'
+import { authMiddleware } from '../middleware/auth.middleware'
+import { validateRequest } from '../middleware/validate'
 
-const router = Router();
+const router = Router()
 
+router.post('/register', registerRules, validateRequest, register)
+router.post('/login', loginRules, validateRequest, login)
+router.get('/me', authMiddleware, me)
 
-router.post('/register', validate(registerSchema), register);
-router.post('/login',validate(loginSchema), login);
-router.get('/me', authMiddleware, (req: AuthRequest, res) => {
-    res.status(200).json({
-      success: true,
-      message: 'Authenticated user',
-      data: { userId: req.userId },
-    })
-  })
-
-
-export default router;
+export default router
