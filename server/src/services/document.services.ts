@@ -1,5 +1,6 @@
 import fs from 'fs/promises'
 import DocumentModel, { IDocument } from "../models/Document";
+import { MIMEType } from 'util';
 
 const formatDocument = (doc: IDocument) => ({
     id: doc._id.toString(),
@@ -48,6 +49,23 @@ export const createDocument = async (input: CreateDocumentInput)=>{
     });
 
     return formatDocument(doc);
+}
+
+
+export const getDocumentById = async (userId: string, documentId: string) => {
+    const doc = await DocumentModel.findOne({_id:documentId,userId});
+    if(!doc){
+        throw new Error('Document not found')
+    }
+    return formatDocument(doc)
+}
+
+export const getDocumentFile = async (userId:string, documentId:string) =>{
+    const doc = await DocumentModel.findOne({_id:documentId,userId})
+    if(!doc){
+        throw new Error('Document not found')
+    }
+    return {filePath: doc.filePath, mimeType: doc.mimeType, originalName: doc.originalName}
 }
 
 export const toggleFavorite = async (userId: string, documentId: string) => {

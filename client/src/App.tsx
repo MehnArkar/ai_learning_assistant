@@ -9,6 +9,7 @@ import ProfilePage from "./pages/profile/ProfilePage"
 import AppLayout from "./layout/AppLayout"
 import PublicRoute from "./components/PublicRoute"
 import ProtectedRoute from "./components/ProtectedRoute"
+import DocumentDetailsPage from "./pages/documents/DocumentDetailsPage"
 
 const App = () => {
   return (
@@ -22,7 +23,7 @@ const App = () => {
       <Route element={<AppLayout/>}>
         <Route path="/dashboard" element={<DashboardPage/>}/>
         <Route path="/documents" element={<DocumentsPage />} />
-        <Route path="/documents/:id" element={<div className="p-6 text-slate-500">Document details coming soon</div>} />
+        <Route path="/documents/:id" element={<DocumentDetailsPage/>} />
         <Route path="/flashcards" element={<FlashcardsPage />} />
         <Route path="/quizzes" element={<QuizzesPage />} />
         <Route path="/profile" element={<ProfilePage />} />

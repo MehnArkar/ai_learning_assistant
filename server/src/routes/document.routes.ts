@@ -1,6 +1,6 @@
 import { Router } from 'express'
 import { authMiddleware } from '../middleware/auth.middleware'
-import { create, favorite, list, remove, rename } from '../controllers/document.controller'
+import { create, favorite, getFile, getOne, list, remove, rename } from '../controllers/document.controller'
 import { uploadPdf } from '../middleware/upload'
 import { validateRequest } from '../middleware/validate'
 import {
@@ -16,6 +16,11 @@ const router = Router()
 router.use(authMiddleware)
 
 router.get('/', listDocumentsRules, validateRequest, list)
+
+
+router.get('/:id',documentIdRules, validateRequest, getOne)
+
+router.get('/:id/file',documentIdRules, validateRequest, getFile)
 
 router.post(
   '/',

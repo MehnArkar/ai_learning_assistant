@@ -38,6 +38,17 @@ export const getDocuments = async (search?:string, favorite?:boolean) => {
     return data;
 }
 
+export const getDocument = async (id:string) =>{
+    const {data} = await api.get<DocumentResponse>(`/documents/${id}`)
+    return data
+}
+
+
+export const getDocumentFile = async (id:string) =>{
+    const {data} = await api.get<Blob>(`/documents/${id}/file`,{responseType:'blob'})
+    return data
+}
+
 export const uploadDocument = async(name: string, file: File) => {
 
     const formData = new FormData()

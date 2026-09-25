@@ -3,6 +3,8 @@ import { AuthRequest, getUserId } from '../middleware/auth.middleware'
 import {
   createDocument,
   deleteDocument,
+  getDocumentById,
+  getDocumentFile,
   listDocuments,
   renameDocument,
   toggleFavorite,
@@ -50,6 +52,28 @@ export const create = async (req: AuthRequest, res: Response): Promise<void> => 
   } catch (error) {
     const message = error instanceof Error ? error.message : 'Failed to create document'
     res.status(400).json({ success: false, message })
+  }
+}
+
+export const getOne = async (req:AuthRequest, res:Response):Promise<void> => {
+  try{
+    const data = await getDocumentById(getUserId(req),getDocumentId(req))
+    res.status(200).json({success:true,message:'Document fetched',data})
+  }catch(error){
+    const message = error instanceof Error ? error.message : 'Failed to fetch document'
+    res.status(404).json({succes:false, message})
+  }
+}
+
+export const getFile = async (req:AuthRequest, res:Response):Promise<void> =>{
+  try{
+    const doc = await getDocumentFile(getUserId(req),getDocumentId(req))
+    res.setHeader('Content-Type', doc.mimeType)
+    res.setHeader('Content-Disposition', `inline; filename="${doc.originalName}"`)
+    res.sendFile(doc.filePath)
+  }catch(err){
+    const message = err instanceof Error ? err.message : 'Failed to load file'
+    res.status(404).json({success:false, message})
   }
 }
 
