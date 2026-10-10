@@ -10,6 +10,9 @@ import {
   renameDocumentRules,
 } from '../validators/document.validator'
 import { requirePdfFile } from '../middleware/requireFile'
+import { getMessages, postMessage } from '../controllers/chat.controller'
+import { sendMessageRules } from '../validators/chat.validator'
+
 
 const router = Router()
 
@@ -21,6 +24,11 @@ router.get('/', listDocumentsRules, validateRequest, list)
 router.get('/:id',documentIdRules, validateRequest, getOne)
 
 router.get('/:id/file',documentIdRules, validateRequest, getFile)
+
+router.get('/:id/chat', documentIdRules, validateRequest, getMessages)
+
+router.post('/:id/chat', sendMessageRules, validateRequest, postMessage)
+
 
 router.post(
   '/',

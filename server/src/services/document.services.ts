@@ -1,5 +1,7 @@
 import fs from 'fs/promises'
 import DocumentModel, { IDocument } from "../models/Document";
+import DocumentChunkModel from "../models/DocumentChunk";
+import ChatMessageModel from "../models/ChatMessage";
 import { MIMEType } from 'util';
 
 const formatDocument = (doc: IDocument) => ({
@@ -104,6 +106,8 @@ export const deleteDocument = async (userId: string, documentId: string)=>{
         // file already missing — still delete the DB row
     }
 
+    await DocumentChunkModel.deleteMany({ documentId: doc._id })
+    await ChatMessageModel.deleteMany({ documentId: doc._id })
     await doc.deleteOne();
 }
 

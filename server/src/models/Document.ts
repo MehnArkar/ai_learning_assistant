@@ -35,8 +35,8 @@ const documentSchema = new Schema<IDocument>(
         status:{
             type:String,
             enum:['uploaded', 'processing', 'ready', 'failed'],
-
-        }
+            default:'uploaded'
+        },
     },
     {
         timestamps:true

@@ -4,6 +4,7 @@ import { getDocument, type DocumentItem } from "../../api/documents"
 import axios from "axios"
 import { ChevronLeft } from "lucide-react"
 import PdfViewerTab from "./tabs/PdfViewerTab"
+import ChatTab from "./tabs/ChatTab"
 
 type Tab = 'pdf' | 'chat' | 'summary' | 'flashcards' | 'quizzes'
 const TABS: { id: Tab; label: string }[] = [
@@ -47,7 +48,8 @@ const DocumentDetailsPage = ()=> {
     if (error || !doc || !id) return <p className="p-6 text-sm text-red-500 h-full flex items-center justify-center">{error || 'Document not found'}</p>
 
     return (
-        <div>
+        // Fill the screen below the 64px (h-16) app header so tabs can stretch to the bottom
+        <div className="flex flex-col h-[calc(100vh-4rem)]">
             {/* Header */}
             <div className="flex items-center gap-3 px-6 py-4 bg-white border-b border-slate-100">
                 <button
@@ -87,8 +89,12 @@ const DocumentDetailsPage = ()=> {
                 ))}
             </div>
 
-            {tab==='pdf' && <PdfViewerTab documentId={id}/>}
-            {tab !== 'pdf' && <p className="p-6 text-sm text-slate-400">Coming soon</p>}
+            <div className="flex-1 min-h-0 overflow-y-auto">
+                {tab === 'pdf' && <PdfViewerTab documentId={id} />}
+                {tab === 'chat' && <ChatTab documentId={id} />}
+                {tab !== 'pdf' && tab !== 'chat' && <p className="p-6 text-sm text-slate-400">Coming soon</p>}
+            </div>
+
         </div>
     )
 }

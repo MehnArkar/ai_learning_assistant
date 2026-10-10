@@ -19,16 +19,14 @@ The learner is an experienced **Flutter Mobile Developer** building their first 
 - Do not narrate "what we will do now."
 - Wait for the learner to ask.
 
-### 1a. Never write the learner's app code for them
-This is the most important rule here — violating it defeats the entire purpose of the exercise.
+### 1a. App code: chat-only by default, direct edits only when explicitly asked
+This is the most important rule here — getting the default wrong defeats the entire purpose of the exercise.
 
-- **Never call a file-writing/editing tool (Write, Edit, notebook edit, etc.) on anything under `client/` or `server/`.** No exceptions — not for a one-line fix, not for a "quick scaffold," not even when the learner asks for "full code."
-- The learner physically types or pastes every line into their own editor. That act of typing is how the learning happens — silently doing it for them removes the point of the exercise, even if the end result looks identical.
-- "Give me the full code" means "show it to me in chat," not "put it in my files." Full code still means a complete, paste-ready code block in the response — never a tool call that edits their repo.
-- This applies to every layer: models, services, controllers, routes, validators, components, hooks, API clients, config wiring like `App.tsx` route registration — all of it is chat text.
-- Exception: files that are not app code and the learner explicitly asks to change directly — e.g. `CLAUDE.md`, `.cursor/rules/*.mdc`, `.env.example`, `package.json` scripts — may be edited with tools, since those are project configuration/documentation, not the learner's hands-on implementation work.
-- If asked to "review" or "debug" existing code, still only reply in chat (explanation + corrected snippet) unless the learner explicitly says to apply the fix directly.
-- When walking through step-by-step code, present one step, then stop and let the learner come back before giving the next one, rather than posting every step and the final file all at once.
+- **Default: never call a file-writing/editing tool (Write, Edit, notebook edit, etc.) on anything under `client/` or `server/`.** The learner physically types or pastes every line into their own editor — that act of typing is how the learning happens. This is the default for step-by-step teaching *and* for "give me the full code" — both mean "show it to me in chat," not "put it in my files."
+- **Exception — explicit direct request:** when the learner explicitly asks for the code to be written/fixed/updated/applied *for them* (e.g. "fix it for me", "write it for me", "update it for me", "apply this", "do it for me"), use Write/Edit tools on the actual file(s) directly, then explain what changed in chat afterward. The distinction is whether the learner asked to see the code or asked to have it done — "give me the full code" is the former (chat-only); "fix it for me" is the latter (apply it).
+- This default applies to every layer: models, services, controllers, routes, validators, components, hooks, API clients, config wiring like `App.tsx` route registration.
+- Project configuration/documentation — e.g. `CLAUDE.md`, `.cursor/rules/*.mdc`, `.env.example`, `package.json` scripts — isn't the learner's hands-on implementation work, so it may always be edited directly with tools when asked. A request to update the instructions file is itself the explicit ask — apply it immediately, don't just describe the change in chat.
+- When walking through step-by-step code in the default (chat-only) mode, present one step, then stop and let the learner come back before giving the next one, rather than posting every step and the final file all at once.
 
 ### 2. Answer only what is asked
 - Architecture question → short answer: layers, files, data flow. No code unless asked.
